@@ -1,0 +1,26 @@
+/* CSS declarations go here */
+#barChart rect:hover{
+	fill: orange;
+}
+
+#linegraph .axis path,
+#linegraph .axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+#linegraph .x.axis path {
+	  display: none;
+	}
+
+#linegraph .line {
+	  fill: none;
+	  stroke: none;
+	  stroke-width: 1.5px;
+    fill: red; /* For browsers that do not support gradients */
+    fill: -webkit-linear-gradient(left, red, orange, yellow, green); /* For Safari 5.1 to 6.0 */
+    fill: -o-linear-gradient(left, red, orange, yellow, green); /* For Opera 11.1 to 12.0 */
+    fill: -moz-linear-gradient(left, red, orange, yellow, green); /* For Firefox 3.6 to 15 */
+    fill: linear-gradient(left, red, orange, yellow, green); /* Standard syntax (must be last) */
+}

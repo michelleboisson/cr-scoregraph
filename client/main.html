@@ -1,0 +1,58 @@
+<head>
+  <title>overall-score-graph</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+
+
+<!--  {{> bargraph}} -->
+   {{> linegraph}}
+
+<ul>
+      {{#each products}}
+        {{> product}}
+      {{/each}}
+    </ul>
+
+</body>
+<template name="product">
+  <li>{{displayName}}, {{overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
+</template>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+
+  {{productCat}}
+</template>
+
+<template name="bargraph">
+  <svg id="barChart">
+    </svg>
+</template>
+
+<template name="linegraph">
+  <h4>Line Chart - <small><a href="http://bl.ocks.org/mbostock/3883245">View Original</a></small></h4>
+    <svg id="linegraph">
+    </svg>
+    <input type="button" id="add" value="Add a Value" />
+    <input type="button" id="remove" value="Remove a Value" />
+    <input type="button" id="randomize" value="Randomize Values" />
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
+
+
+
+
