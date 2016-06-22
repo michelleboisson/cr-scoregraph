@@ -1,4 +1,14 @@
 /* CSS declarations go here */
+* {
+	font-family: "Averta", "Helvetica", sans-serif;
+}
+
+#container-fluid {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
 #barChart rect:hover{
 	fill: orange;
 }
@@ -9,18 +19,27 @@
 	  stroke: #000;
 	  shape-rendering: crispEdges;
 	}
-/*
-#linegraph .x.axis path {
-	  display: none;
-	}
 
-#linegraph .line {
-	stroke: #ccc;
-	stroke-width: 1.5px;
-    fill: url(#area-gradient);	
-}
-*/
 .area {							
     fill: url(#area-gradient);					
     stroke-width: 0px;			
+}
+
+.styled-select select {
+    background: transparent;
+    width: 404px;
+    padding: 2px;
+    font-size: 25px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 32px;
+    -webkit-appearance: none;
+}
+.styled-select {
+    width: 404px;
+    height: 36px;
+    overflow: hidden;
+    background: url(/dropdown-arrow.png) no-repeat right #fff;
+    border-bottom: 3px solid #000;
 }

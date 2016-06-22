@@ -1,0 +1,194 @@
+%!Adobe-FontList 1.16
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Averta-Black
+FamilyName:Averta
+StyleName:Black
+MenuName:Averta Black
+StyleBits:0
+WeightClass:900
+WidthClass:5
+AngleClass:0
+FullName:Averta Black
+WritingScript:Roman
+OutlineFileName:\Averta-Black.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:142656
+FileModTime:1451908245
+NameArray:0,Mac,4,Averta Black
+NameArray:1,Mac,18,Averta Black
+NameArray:0,Win,1,Averta Black
+NameArray:0,Win,16,Averta
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Averta-Bold
+FamilyName:Averta
+StyleName:Bold
+MenuName:Averta Bold
+StyleBits:0
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Averta Bold
+WritingScript:Roman
+OutlineFileName:\Averta-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:145828
+FileModTime:1451908245
+NameArray:0,Mac,18,Averta Bold
+NameArray:0,Mac,4,Averta Bold
+NameArray:0,Win,1,Averta Bold
+NameArray:0,Win,16,Averta
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Averta-ExtraBold
+FamilyName:Averta
+StyleName:ExtraBold
+MenuName:Averta ExtraBold
+StyleBits:0
+WeightClass:800
+WidthClass:5
+AngleClass:0
+FullName:Averta ExtraBold
+WritingScript:Roman
+OutlineFileName:\Averta-ExtraBold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:147440
+FileModTime:1451908245
+NameArray:0,Mac,4,Averta ExtraBold
+NameArray:1,Mac,18,Averta ExtraBold
+NameArray:0,Win,1,Averta ExtraBold
+NameArray:0,Win,16,Averta
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Averta-Light
+FamilyName:Averta
+StyleName:Light
+MenuName:Averta Light
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Averta Light
+WritingScript:Roman
+OutlineFileName:\Averta-Light.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:144408
+FileModTime:1451908245
+NameArray:0,Mac,18,Averta Light
+NameArray:0,Mac,4,Averta Light
+NameArray:0,Win,1,Averta Light
+NameArray:0,Win,16,Averta
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Averta-Regular
+FamilyName:Averta
+StyleName:Regular
+MenuName:Averta Regular
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Averta Regular
+WritingScript:Roman
+OutlineFileName:\Averta-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:144632
+FileModTime:1451908245
+NameArray:0,Mac,4,Averta Regular
+NameArray:1,Mac,18,Averta Regular
+NameArray:0,Win,1,Averta Regular
+NameArray:0,Win,16,Averta
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:HelveticaNeue-Bold
+FamilyName:Helvetica Neue
+StyleName:75 Bold
+MenuName:Helvetica 55 Roman
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Helvetica 75 Bold
+WritingScript:Roman
+OutlineFileName:\HelveNeuBol
+DataFormat:POSTResource
+UsesStandardEncoding:yes
+isCFF:no
+FileLength:29160
+FileModTime:1452703243
+DesignSize:-1
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:HelveticaNeue-Light
+FamilyName:Helvetica Neue
+StyleName:45 Light
+MenuName:Helvetica 45 Light
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Helvetica 45 Light
+WritingScript:Roman
+OutlineFileName:\HelveNeuLig
+DataFormat:POSTResource
+UsesStandardEncoding:yes
+isCFF:no
+FileLength:29050
+FileModTime:1452703243
+DesignSize:-1
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Suitcase
+FontName:HelveticaNeue-Bold
+OutlineFileName:\HelveticaNeue-Bold
+ResourceID:14768
+MacStyle:0
+FileLength:4968
+FileModTime:1452703243
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Suitcase
+FontName:HelveticaNeue-Light
+OutlineFileName:\HelveticaNeue-Light
+ResourceID:14766
+MacStyle:0
+FileLength:4854
+FileModTime:1452703243
+%EndFont
+

@@ -3,15 +3,30 @@
 </head>
 
 <body>
-<!--  {{> bargraph}} -->
-  {{> linegraph}}
-  {{> filters}}
+  <div id="header">
+    <img src="staticheader.png" width="100%"/>
+
+  </div>
+  <div id="container-fluid">
+  <div id="" class="row">
+    <div class="span12">
+    <!--  {{> bargraph}} -->
+      <div class="row">
+        <div class="span12">
+          {{> filters}}
+        </div>
+      </div>
+    
+    {{> linegraph}}
+  
 <ul>
       {{#each products}}
         {{> product}}
       {{/each}}
     </ul>
-
+  </div>
+</div>
+</div>
 </body>
 <template name="product">
   <li><img src="{{imageThumbnail}}" /> {{displayName}}, {{overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
@@ -30,12 +45,11 @@
 </template>
 
 <template name="linegraph">
-  <h4>Line Chart - <small><a href="http://bl.ocks.org/mbostock/3883245">View Original</a></small></h4>
     <svg id="linegraph">
     </svg>
     <div style="display: block">
-    <input type="button" id="add" value="Add a fake product" />
-    <input type="button" id="remove" value="Remove all products" />
+    <!--<input type="button" id="add" value="Add a fake product" />
+    <input type="button" id="remove" value="Remove all products" />-->
   </div>
 </template>
 
@@ -50,12 +64,16 @@
 </template>
 
 <template name="filters">
+  <div id="filters">
+  <div class="styled-select">
   <select id="changeCategory" class="form-control">
         <option value="">All refrigerators</option>
         {{#each fridgeCat}}
           <option value="{{catid}}">{{catname}}</option>
         {{/each}}
     </select>
+  </div>
+  </div>
 </template>
 
 
