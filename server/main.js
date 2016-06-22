@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { ProductDatabase } from '../imports/api/products.js';
 
 var API_KEY = "hjp3y9wmb96sumppbsrjhe7r";
-    API_CATEGORY = "compactRefrigerators";
+    //API_CATEGORY = "compactRefrigerators";
 
 Meteor.startup(function(){
   // code to run on server at startup
@@ -13,10 +13,8 @@ Meteor.startup(function(){
     console.log("server is starting");
 
     //load data from API: toasters
-    var API_KEY = "hjp3y9wmb96sumppbsrjhe7r";
-    API_CATEGORY = "compactRefrigerators";
     var apiLink = "http://api.consumerreports.org/v0.1/products.(category.name="+API_CATEGORY+").json?api_key="+API_KEY+"&numResults=5000";
-	//myarray = HTTP.get(apiLink).data;
+	myarray = HTTP.get(apiLink).data;
     
     //console.log(myarray);
     //console.log(myarray.length);
@@ -36,7 +34,6 @@ Meteor.startup(function(){
       removeAllProducts: function() {
         console.log("removing all products");
         return ProductDatabase.remove({});
-
       }
 
     });

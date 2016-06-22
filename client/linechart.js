@@ -44,8 +44,8 @@ Template.linegraph.rendered = function(){
 
 	//Width and height
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-		width = 600 - margin.left - margin.right,
-		height = 400 - margin.top - margin.bottom;
+		width = 1000 - margin.left - margin.right,
+		height = 100 - margin.top - margin.bottom;
 
 	//var x = d3.time.scale()
 	//	.range([0, width]);
@@ -93,7 +93,12 @@ Template.linegraph.rendered = function(){
 
 	Deps.autorun(function(){
 		//var dataset = ProductDatabase.find({},{sort:{score:-1}}).fetch();
-		var fulldata = ProductDatabase.find({},{sort: {overallScore: 1}}).fetch();
+		if (Session.get("selectedProductCategoryID"))
+			var modifier = {"category.id" : Session.get("selectedProductCategoryID")};
+		else
+			var modifier = {};
+		var fulldata = ProductDatabase.find(modifier,{sort: {overallScore: 1}}).fetch();
+		//var fulldata = ProductDatabase.find({category : {id : "34925"}},{sort: {overallScore: 1}}).fetch();
 		var dataset = {};
 		dataset = _.groupBy(fulldata, function(fridge){return parseInt(fridge['overallScore'])}); 
 					//Obj {88: Array[1], 85: Array[2]}
@@ -142,22 +147,64 @@ Template.linegraph.rendered = function(){
 			fullarray.push({'score': i, 'value': 0})
 
 			groupedScores.forEach(function(element, index, array){
-				console.log ("this old", element)
+				//console.log ("this old", element)
 				if (element.score == i) {
 					fullarray[i]['value'] = element['value']
-					console.log ("this exists", element)
+					//console.log ("this exists", element)
 				}
 			})
 		}
 		console.log(groupedScores, fullarray)
 
 		dataset = fullarray;
-		var paths = svg.selectAll("path.line")
-			.data([dataset]); //todo - odd syntax here - should use a key function, but can't seem to get that working
 
 		x.domain(d3.extent(dataset, function(d) { return d.score; }));
 		y.domain(d3.extent(dataset, function(d) { return d.value; }));
+// Define the area fill
+var	area = d3.svg.area()	
+    .x(function(d) { return x(d.score); })	
+    .y0(height)					
+    .y1(function(d) { return y(d.value); });
+    
 
+		//add the gradient
+		/* svg.append("linearGradient")				
+        .attr("id", "area-gradient")			
+        .attr("gradientUnits", "userSpaceOnUse")	
+        .attr("x1", 0).attr("y1", y(0))			
+        .attr("x2", 0).attr("y2", y(1000))		
+    .selectAll("stop")						
+        .data([								
+            {offset: "0%", color: "steelblue"},
+        {offset: "50%", color: "gray"},
+        {offset: "100%", color: "red"}
+        ])						
+    .enter().append("stop")			
+        .attr("offset", function(d) { return d.offset; })	
+        .attr("stop-color", function(d) { return d.color; });
+		*/	
+
+    svg.append("linearGradient")				
+        .attr("id", "area-gradient")			
+        .attr("gradientUnits", "userSpaceOnUse")	
+        .attr("x1", 0).attr("y1", y(0))			
+        .attr("x2", 0).attr("y2", y(1000))		
+    .selectAll("stop")						
+        .data([								
+            {offset: "0%", color: "red"},		
+            {offset: "30%", color: "red"},	
+            {offset: "45%", color: "black"},		
+            {offset: "55%", color: "black"},		
+            {offset: "60%", color: "lawngreen"},	
+            {offset: "100%", color: "lawngreen"}	
+        ])						
+    .enter().append("stop")			
+        .attr("offset", function(d) { return d.offset; })	
+        .attr("stop-color", function(d) { return d.color; });
+
+		var paths = svg.selectAll("path.line")
+			.data([dataset])
+			
 		//Update X axis
 		svg.select(".x.axis")
 			.transition()
@@ -174,7 +221,7 @@ Template.linegraph.rendered = function(){
 			.enter()
 			.append("path")
 			.attr("class", "line")
-			.attr('d', line);
+			.attr('d', line)
 
 		paths
 			.attr('d', line); //todo - should be a transisition, but removed it due to absence of key

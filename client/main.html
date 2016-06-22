@@ -3,14 +3,9 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-
-
 <!--  {{> bargraph}} -->
-   {{> linegraph}}
-
+  {{> linegraph}}
+  {{> filters}}
 <ul>
       {{#each products}}
         {{> product}}
@@ -19,7 +14,7 @@
 
 </body>
 <template name="product">
-  <li>{{displayName}}, {{overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
+  <li><img src="{{imageThumbnail}}" /> {{displayName}}, {{overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
 </template>
 
 <template name="hello">
@@ -38,9 +33,10 @@
   <h4>Line Chart - <small><a href="http://bl.ocks.org/mbostock/3883245">View Original</a></small></h4>
     <svg id="linegraph">
     </svg>
-    <input type="button" id="add" value="Add a Value" />
-    <input type="button" id="remove" value="Remove a Value" />
-    <input type="button" id="randomize" value="Randomize Values" />
+    <div style="display: block">
+    <input type="button" id="add" value="Add a fake product" />
+    <input type="button" id="remove" value="Remove all products" />
+  </div>
 </template>
 
 <template name="info">
@@ -52,6 +48,16 @@
     <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
   </ul>
 </template>
+
+<template name="filters">
+  <select id="changeCategory" class="form-control">
+        <option value="">All refrigerators</option>
+        {{#each fridgeCat}}
+          <option value="{{catid}}">{{catname}}</option>
+        {{/each}}
+    </select>
+</template>
+
 
 
 

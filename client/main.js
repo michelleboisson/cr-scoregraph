@@ -33,7 +33,11 @@ Template.hello.events({
 
 Template.body.helpers({
   products() {
-  	return ProductDatabase.find({},{sort : {overallScore:1}})
+  	if (Session.get("selectedProductCategoryID"))
+		var modifier = {"category.id" : Session.get("selectedProductCategoryID")};
+	else
+		var modifier = {};
+  	return ProductDatabase.find(modifier,{sort : {overallScore:1}})
   }
 });
 
@@ -43,4 +47,29 @@ Template.product.events({
 		ProductDatabase.remove(event.currentTarget.getAttribute('id'))
 
 	}
+})
+Template.filters.helpers({
+  	fridgeCat : function(){
+  		var myArray = ProductDatabase.find().fetch();
+		groupedByObj = _.groupBy(myArray, function(fridge){return fridge['category'].id}); 
+		//Session.set("selectedProductCategory", jsonObj);
+		//setFilters(jsonObj);
+		var groupedcats = [];
+		_.mapValues(groupedByObj, function(val, key) {
+		//_.mapObject(dataset, function(val, key){
+			//key = parseInt(key);
+			groupedcats.push({'catid': key, 'catname': val[0].category.pluralName})
+		})
+		//console.log('groupedcats', groupedcats)
+		return groupedcats
+		//return getFilters();
+  	}
+})
+Template.filters.events({
+	'change select#changeCategory' : function(event, template){
+		var thiscat = event.currentTarget.value
+		//console.log(thiscat);
+		Session.set("selectedProductCategoryID" , thiscat)
+	}
+
 })
