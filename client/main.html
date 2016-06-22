@@ -4,21 +4,23 @@
 
 <body>
   <div id="header">
-    <img src="staticheader.png" width="100%"/>
+    <img src="staticheader.png" />
 
   </div>
   <div id="container-fluid">
-  <div id="" class="row">
+  <div id="" class="row-fluid">
     <div class="span12">
     <!--  {{> bargraph}} -->
-      <div class="row">
+      <div class="row-fluid">
         <div class="span12">
           {{> filters}}
         </div>
       </div>
-    
-    {{> linegraph}}
-  
+      <div class="row-fluid">
+        <div class="span12">
+          {{> linegraph}}
+        </div>
+      </div>
 <ul>
       {{#each products}}
         {{> product}}
@@ -29,7 +31,7 @@
 </div>
 </body>
 <template name="product">
-  <li><img src="{{imageThumbnail}}" /> {{displayName}}, {{overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
+  <li><img src="{{imageThumbnail}}" /> {{displayName}}, {{convertToInt overallScore}} <a href="#" class="" id="{{_id}}">remove</a></li>
 </template>
 
 <template name="hello">
@@ -64,7 +66,8 @@
 </template>
 
 <template name="filters">
-  <div id="filters">
+  <div id="filters" class="row-fluid">
+    <div class="span8">
   <div class="styled-select">
   <select id="changeCategory" class="form-control">
         <option value="">All refrigerators</option>
@@ -72,6 +75,12 @@
           <option value="{{catid}}">{{catname}}</option>
         {{/each}}
     </select>
+  </div>
+</div>
+  <div class="span4" style="text-align: right">
+    <img src="data-compare.png" />
+    <img src="data-grid.png" />
+    <img src="data-rows.png" />
   </div>
   </div>
 </template>

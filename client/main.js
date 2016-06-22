@@ -48,6 +48,11 @@ Template.product.events({
 
 	}
 })
+Template.product.helpers({
+	convertToInt(number){
+		return parseInt(number)
+	}
+})
 Template.filters.helpers({
   	fridgeCat : function(){
   		var myArray = ProductDatabase.find().fetch();

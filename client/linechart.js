@@ -43,12 +43,9 @@ Template.linegraph.events({
 Template.linegraph.rendered = function(){
 
 	//Width and height
-	var margin = {top: 20, right: 20, bottom: 30, left: 50},
+	var margin = {top: 20, right: 20, bottom: 30, left: 5},
 		width = 1000 - margin.left - margin.right,
 		height = 100 - margin.top - margin.bottom;
-
-	//var x = d3.time.scale()
-	//	.range([0, width]);
 
 	var x = d3.scale.linear()
 		.range([0, width]);
@@ -71,6 +68,14 @@ Template.linegraph.rendered = function(){
 		.y(function(d) {
 			return y(d.value);
 		});
+		
+		// Define the area fill
+		/*var	area = d3.svg.area()	
+    		.x(function(d) { return x(d.score); })	
+    		.y0(height)					
+    		.y1(function(d) { return y(d.value); });
+*/
+
 
 	var svg = d3.select("#linegraph")
 		.attr("width", width + margin.left + margin.right)
@@ -89,7 +94,8 @@ Template.linegraph.rendered = function(){
 		.attr("y", 6)
 		.attr("dy", ".71em")
 		.style("text-anchor", "end")
-		.text("Count");
+		.style("font-size", "8px")
+		.text("# of models");
 
 	Deps.autorun(function(){
 		//var dataset = ProductDatabase.find({},{sort:{score:-1}}).fetch();
@@ -160,47 +166,29 @@ Template.linegraph.rendered = function(){
 
 		x.domain(d3.extent(dataset, function(d) { return d.score; }));
 		y.domain(d3.extent(dataset, function(d) { return d.value; }));
-// Define the area fill
-var	area = d3.svg.area()	
-    .x(function(d) { return x(d.score); })	
-    .y0(height)					
-    .y1(function(d) { return y(d.value); });
-    
-
-		//add the gradient
-		/* svg.append("linearGradient")				
-        .attr("id", "area-gradient")			
-        .attr("gradientUnits", "userSpaceOnUse")	
-        .attr("x1", 0).attr("y1", y(0))			
-        .attr("x2", 0).attr("y2", y(1000))		
-    .selectAll("stop")						
-        .data([								
-            {offset: "0%", color: "steelblue"},
-        {offset: "50%", color: "gray"},
-        {offset: "100%", color: "red"}
-        ])						
-    .enter().append("stop")			
-        .attr("offset", function(d) { return d.offset; })	
-        .attr("stop-color", function(d) { return d.color; });
-		*/	
 
     svg.append("linearGradient")				
-        .attr("id", "area-gradient")			
+        .attr("id", "line-gradient")			
         .attr("gradientUnits", "userSpaceOnUse")	
-        .attr("x1", 0).attr("y1", y(0))			
-        .attr("x2", 0).attr("y2", y(1000))		
+        
     .selectAll("stop")						
         .data([								
-            {offset: "0%", color: "red"},		
-            {offset: "30%", color: "red"},	
-            {offset: "45%", color: "black"},		
-            {offset: "55%", color: "black"},		
-            {offset: "60%", color: "lawngreen"},	
-            {offset: "100%", color: "lawngreen"}	
+            {offset: "5%", color: "red"},
+            {offset: "50%", color: "orange"},
+            {offset: "70%", color: "yellow"},
+            {offset: "95%", color: "green"}
+               	
         ])						
     .enter().append("stop")			
         .attr("offset", function(d) { return d.offset; })	
         .attr("stop-color", function(d) { return d.color; });
+
+        // Add the valueline path.
+    var maxX = x(d3.extent(dataset, function(d) { return d.value; })[1]);
+    svg.append("path")
+        .attr("class", "line").attr("fill","url(#")
+        .attr("d", ''+line(dataset)+"L0,"+y(0)+'L'+maxX+","+y(0));
+
 
 		var paths = svg.selectAll("path.line")
 			.data([dataset])
@@ -212,17 +200,17 @@ var	area = d3.svg.area()
 			.call(xAxis);
 			
 		//Update Y axis
-		svg.select(".y.axis")
+		/*svg.select(".y.axis")
 			.transition()
 			.duration(1000)
 			.call(yAxis);
-		
+		*/
 		paths
 			.enter()
 			.append("path")
 			.attr("class", "line")
 			.attr('d', line)
-
+		
 		paths
 			.attr('d', line); //todo - should be a transisition, but removed it due to absence of key
 			

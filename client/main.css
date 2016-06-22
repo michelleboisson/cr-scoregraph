@@ -4,11 +4,14 @@
 }
 
 #container-fluid {
-	width: 80%;
+	width: 1000px;
 	margin: 0 auto;
 	margin-top: 50px;
 }
-
+#header{
+	width: 1218px;
+    margin: 0 auto;
+}
 #barChart rect:hover{
 	fill: orange;
 }
@@ -16,13 +19,19 @@
 #linegraph .axis path,
 #linegraph .axis line {
 	  fill: none;
-	  stroke: #000;
+	  stroke: #CCC;
+	  stroke-width: 1;
 	  shape-rendering: crispEdges;
 	}
 
-.area {							
-    fill: url(#area-gradient);					
-    stroke-width: 0px;			
+.line{
+	fill: url(#line-gradient);
+    stroke: url(#line-gradient);
+    stroke-width: 2px;
+}
+
+#filters{
+	margin-bottom:50px;
 }
 
 .styled-select select {
