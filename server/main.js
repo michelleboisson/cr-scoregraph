@@ -14,7 +14,8 @@ Meteor.startup(function(){
 
     //load data from API: toasters
     var apiLink = "http://api.consumerreports.org/v0.1/products.(category.name="+API_CATEGORY+").json?api_key="+API_KEY+"&numResults=5000";
-	//myarray = HTTP.get(apiLink).data;
+	   myarray = HTTP.get(apiLink).data;
+  
 
     if (ProductDatabase.find({}).count() <= 0){
         for (var i=0; i<myarray.length; i++){
