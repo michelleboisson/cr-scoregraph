@@ -4,12 +4,14 @@
 }
 
 #container-fluid {
-	width: 1000px;
+/*	width: 1000px;*/
+    width: 90%;
 	margin: 0 auto;
 	margin-top: 50px;
 }
 #header{
-	width: 1218px;
+/*	width: 1218px;*/
+    width: 90%;
     margin: 0 auto;
 }
 #barChart rect:hover{
