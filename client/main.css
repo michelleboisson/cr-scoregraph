@@ -2,7 +2,16 @@
 * {
 	font-family: "Averta", "Helvetica Neue", sans-serif;
 }
-
+html { -webkit-text-size-adjust: none; }
+html {
+  min-height: 100%;
+}
+ 
+body {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
 #container-fluid {
 /*	width: 1000px;*/
     width: 90%;

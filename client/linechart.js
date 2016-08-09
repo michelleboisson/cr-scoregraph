@@ -46,7 +46,10 @@ Template.linegraph.rendered = function(){
 	var margin = {top: 20, right: 20, bottom: 30, left: 5},
 		width = 1000 - margin.left - margin.right,
 		height = 100 - margin.top - margin.bottom;
-
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ 		// some code..
+ 		width = 300;
+	}
 	var x = d3.scale.linear()
 		.range([0, width]);
 
