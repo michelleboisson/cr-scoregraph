@@ -13,6 +13,7 @@ _ = lodash;
 Session.setDefault('barChartSort','none');
 Session.setDefault('barChartSortModifier',undefined);
 
+
 Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
@@ -41,7 +42,8 @@ Template.body.helpers({
 		modifier = {"brand.id" : Session.get("selectedProductBrandID")};
 	}
 	//modifier = {"category.id" : Session.get("selectedProductCategoryID"),"brand.id" : Session.get("selectedProductBrandID")};
-  	return ProductDatabase.find(modifier,{sort : {overallScore:1}})
+	currentCollection = ProductDatabase.find(modifier,{sort : {overallScore:-1}})
+  	return currentCollection
   }
 });
 
@@ -84,9 +86,17 @@ Template.filters.helpers({
 			//key = parseInt(key);
 			groupedbrands.push({'brandid': key, 'brandname': val[0].brand.displayName})
 		})
+		//sort by brand name
+		groupedbrands.sort(function(a, b){
+    		var nameA=a.brandname.toLowerCase(), nameB=b.brandname.toLowerCase()
+    		if (nameA < nameB) //sort string ascending
+        		return -1 
+    		if (nameA > nameB)
+     		   return 1
+    		return 0 //default return value (no sorting)
+		})
 		console.log('groupedbrands', groupedbrands)
 		return groupedbrands
-		//return getFilters();
   	}
 })
 Template.filters.events({

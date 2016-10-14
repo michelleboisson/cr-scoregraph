@@ -154,7 +154,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 			//groupedScores.push(lastAnchor)
 		}
 
-//fill in the array with 0 scores
+		//fill in the array with 0 scores
 		var fullarray = [];
 		for (var i = 0; i <= 100; i++) {
 			fullarray.push({'score': i, 'value': 0})
@@ -169,6 +169,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		}
 		console.log(groupedScores, fullarray)
 
+		//hook up fullarray to dataset for graph
 		dataset = fullarray;
 
 		x.domain(d3.extent(dataset, function(d) { return d.score; }));

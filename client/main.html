@@ -22,7 +22,7 @@
           {{> linegraph}}
         </div>
       </div>
-<ul>
+    <ul>
       {{#each products}}
         {{> product}}
       {{/each}}
@@ -32,14 +32,14 @@
 </div>
 
 
-<!-- intercom.io demo -->
+<!-- intercom.io demo 
 <script>
   window.intercomSettings = {
     app_id: "a3mvjs21"
   };
 </script>
 <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/a3mvjs21';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-
+-->
 
 
 </body>
@@ -81,14 +81,14 @@
 
 <template name="filters">
   <div id="filters" class="row-fluid">
-    <div class="span8">
+    <div class="span10">
   <div class="styled-select">
   <select id="changeCategory" class="form-control">
-        <option value="">All refrigerators</option>
-        {{#each fridgeCat}}
-          <option value="{{catid}}">{{catname}}</option>
-        {{/each}}
-    </select>
+      <option value="">All refrigerators</option>
+      {{#each fridgeCat}}
+        <option value="{{catid}}">{{catname}}</option>
+      {{/each}}
+  </select>
   </div>
   <div class="styled-select">
     <select id="changeBrand" class="form-control">
@@ -99,7 +99,8 @@
     </select>
   </div>
 </div>
-  <div class="span4" style="text-align: right">
+  <div class="span2" style="text-align: right">
+     __ of __
     <img src="data-compare.png" />
     <img src="data-grid.png" />
     <img src="data-rows.png" />

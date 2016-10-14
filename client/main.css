@@ -62,4 +62,6 @@ body {
     overflow: hidden;
     background: url(/dropdown-arrow.png) no-repeat right #fff;
     border-bottom: 3px solid #000;
+    display: inline-block;
+    margin-right: 20px;
 }
