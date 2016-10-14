@@ -102,10 +102,14 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	Deps.autorun(function(){
 		//var dataset = ProductDatabase.find({},{sort:{score:-1}}).fetch();
-		if (Session.get("selectedProductCategoryID"))
-			var modifier = {"category.id" : Session.get("selectedProductCategoryID")};
-		else
-			var modifier = {};
+		var modifier = {};
+  		if (Session.get("selectedProductCategoryID"))
+			modifier = {"category.id" : Session.get("selectedProductCategoryID")};
+		if (Session.get("selectedProductBrandID"))
+			modifier = {"brand.id" : Session.get("selectedProductBrandID")};
+
+  		//return ProductDatabase.find(modifier,{sort : {overallScore:1}})
+
 		var fulldata = ProductDatabase.find(modifier,{sort: {overallScore: 1}}).fetch();
 		//var fulldata = ProductDatabase.find({category : {id : "34925"}},{sort: {overallScore: 1}}).fetch();
 		var dataset = {};

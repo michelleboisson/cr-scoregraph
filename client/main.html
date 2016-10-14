@@ -90,6 +90,14 @@
         {{/each}}
     </select>
   </div>
+  <div class="styled-select">
+    <select id="changeBrand" class="form-control">
+        <option value="">All brands</option>
+        {{#each fridgeBrand}}
+          <option value="{{brandid}}">{{brandname}}</option>
+        {{/each}}
+    </select>
+  </div>
 </div>
   <div class="span4" style="text-align: right">
     <img src="data-compare.png" />

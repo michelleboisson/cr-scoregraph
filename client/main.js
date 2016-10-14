@@ -33,10 +33,14 @@ Template.hello.events({
 
 Template.body.helpers({
   products() {
-  	if (Session.get("selectedProductCategoryID"))
-		var modifier = {"category.id" : Session.get("selectedProductCategoryID")};
-	else
-		var modifier = {};
+  	var modifier = {};
+  	if (Session.get("selectedProductCategoryID")){
+  		modifier = {"category.id" : Session.get("selectedProductCategoryID")};
+  	}
+	if (Session.get("selectedProductBrandID")){
+		modifier = {"brand.id" : Session.get("selectedProductBrandID")};
+	}
+	//modifier = {"category.id" : Session.get("selectedProductCategoryID"),"brand.id" : Session.get("selectedProductBrandID")};
   	return ProductDatabase.find(modifier,{sort : {overallScore:1}})
   }
 });
@@ -68,13 +72,37 @@ Template.filters.helpers({
 		//console.log('groupedcats', groupedcats)
 		return groupedcats
 		//return getFilters();
+  	},
+  	fridgeBrand : function(){
+  		var myArray = ProductDatabase.find().fetch();
+		groupedByObj = _.groupBy(myArray, function(fridge){return fridge['brand'].id}); 
+		//Session.set("selectedProductCategory", jsonObj);
+		//setFilters(jsonObj);
+		var groupedbrands = [];
+		_.mapValues(groupedByObj, function(val, key) {
+		//_.mapObject(dataset, function(val, key){
+			//key = parseInt(key);
+			groupedbrands.push({'brandid': key, 'brandname': val[0].brand.displayName})
+		})
+		console.log('groupedbrands', groupedbrands)
+		return groupedbrands
+		//return getFilters();
   	}
 })
 Template.filters.events({
 	'change select#changeCategory' : function(event, template){
 		var thiscat = event.currentTarget.value
 		//console.log(thiscat);
+		$('#changeBrand').val("");
+		Session.set("selectedProductBrandID" , "")
 		Session.set("selectedProductCategoryID" , thiscat)
+	},
+	'change select#changeBrand' : function(event, template){
+		var thisbrand = event.currentTarget.value
+		//console.log(thiscat);
+		$('#changeCategory').val("");
+		Session.set("selectedProductCategoryID" , "")
+		Session.set("selectedProductBrandID" , thisbrand)
 	}
 
 })
