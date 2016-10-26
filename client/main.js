@@ -35,12 +35,10 @@ Template.hello.events({
 Template.body.helpers({
   products() {
   	var modifier = {};
-  	if (Session.get("selectedProductCategoryID")){
-  		modifier = {"category.id" : Session.get("selectedProductCategoryID")};
-  	}
-	if (Session.get("selectedProductBrandID")){
-		modifier = {"brand.id" : Session.get("selectedProductBrandID")};
-	}
+  	if (Session.get("selectedProductCategoryID"))
+			modifier["category.id"] = Session.get("selectedProductCategoryID");
+	if (Session.get("selectedProductBrandID"))
+		modifier["brand.id"] = Session.get("selectedProductBrandID");
 	//modifier = {"category.id" : Session.get("selectedProductCategoryID"),"brand.id" : Session.get("selectedProductBrandID")};
 	currentCollection = ProductDatabase.find(modifier,{sort : {overallScore:-1}})
   	return currentCollection
@@ -103,15 +101,11 @@ Template.filters.events({
 	'change select#changeCategory' : function(event, template){
 		var thiscat = event.currentTarget.value
 		//console.log(thiscat);
-		$('#changeBrand').val("");
-		Session.set("selectedProductBrandID" , "")
 		Session.set("selectedProductCategoryID" , thiscat)
 	},
 	'change select#changeBrand' : function(event, template){
 		var thisbrand = event.currentTarget.value
 		//console.log(thiscat);
-		$('#changeCategory').val("");
-		Session.set("selectedProductCategoryID" , "")
 		Session.set("selectedProductBrandID" , thisbrand)
 	}
 

@@ -101,74 +101,16 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		.text("# of models");
 
 	Deps.autorun(function(){
-		//var dataset = ProductDatabase.find({},{sort:{score:-1}}).fetch();
+
 		var modifier = {};
-  		if (Session.get("selectedProductCategoryID"))
-			modifier = {"category.id" : Session.get("selectedProductCategoryID")};
+		if (Session.get("selectedProductCategoryID"))
+			modifier["category.id"] = Session.get("selectedProductCategoryID");
 		if (Session.get("selectedProductBrandID"))
-			modifier = {"brand.id" : Session.get("selectedProductBrandID")};
-
-  		//return ProductDatabase.find(modifier,{sort : {overallScore:1}})
-
-		var fulldata = ProductDatabase.find(modifier,{sort: {overallScore: 1}}).fetch();
-		//var fulldata = ProductDatabase.find({category : {id : "34925"}},{sort: {overallScore: 1}}).fetch();
-		var dataset = {};
-		dataset = _.groupBy(fulldata, function(fridge){return parseInt(fridge['overallScore'])}); 
-					//Obj {88: Array[1], 85: Array[2]}
-		console.log('full', fulldata[0]) //array of objs
-		console.log('grouped', dataset) // an obj of arrays
-		console.log('grouped keys: scores', _.keys(dataset))
-		var vals = _.values(dataset)
-		console.log('grouped values: scores', _.values(dataset))
+			modifier["brand.id"] = Session.get("selectedProductBrandID");
 		
-		var groupedScores = [];
 
-		_.each((vals), function(d){
-			var value = d.length;
-		})
-		_.each((_.keys(dataset)), function(d){
-			//console.log(d)
-		})
-
-		_.mapValues(dataset, function(val, key) {
-		//_.mapObject(dataset, function(val, key){
-			key = parseInt(key);
-			groupedScores.push({'score': key, 'value': val.length})
-		})
-
-		console.log("final array :: ", groupedScores)
-
-
-
-		//add 'anchor' points to anchor the graph to the bottom.
-		if (groupedScores.length > 0){
-		//start achor
-			//score: smallest score , value : 0
-			var score = groupedScores[0].score;
-			var firstAnchor = {'score':  score, "value" : 0}
-			//groupedScores.push(firstAnchor)
-		//end anchor
-			//score: highest score , value : 0
-			var scorem = groupedScores[groupedScores.length -1].score;
-			var lastAnchor = {'score': scorem, "value" : 0}
-			//groupedScores.push(lastAnchor)
-		}
-
-		//fill in the array with 0 scores
-		var fullarray = [];
-		for (var i = 0; i <= 100; i++) {
-			fullarray.push({'score': i, 'value': 0})
-
-			groupedScores.forEach(function(element, index, array){
-				//console.log ("this old", element)
-				if (element.score == i) {
-					fullarray[i]['value'] = element['value']
-					//console.log ("this exists", element)
-				}
-			})
-		}
-		console.log(groupedScores, fullarray)
-
+		var fullarray = combinedFridgeCount(modifier);
+		
 		//hook up fullarray to dataset for graph
 		dataset = fullarray;
 
@@ -227,3 +169,69 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 			.remove();
 	});
 };
+
+
+var combinedFridgeCount = function(modifier = {}) {
+		console.log("== launch combinedFridgeCount", modifier)
+
+		var fulldata = ProductDatabase.find(modifier,{sort: {overallScore: 1}}).fetch();
+
+		//var fulldata = ProductDatabase.find({category : {id : "34925"}},{sort: {overallScore: 1}}).fetch();
+		var dataset = {};
+		dataset = _.groupBy(fulldata, function(fridge){return parseInt(fridge['overallScore'])}); 
+					//Obj {88: Array[1], 85: Array[2]}
+		console.log('full', fulldata[0]) //array of objs
+		console.log('grouped', dataset) // an obj of arrays
+		console.log('grouped keys: scores', _.keys(dataset))
+		var vals = _.values(dataset)
+		console.log('grouped values: scores', _.values(dataset))
+		
+		var groupedScores = [];
+
+		_.each((vals), function(d){
+			var value = d.length;
+		})
+		_.each((_.keys(dataset)), function(d){
+			//console.log(d)
+		})
+
+		_.mapValues(dataset, function(val, key) {
+		//_.mapObject(dataset, function(val, key){
+			key = parseInt(key);
+			groupedScores.push({'score': key, 'value': val.length})
+		})
+
+		console.log("final array :: ", groupedScores)
+
+
+
+		//add 'anchor' points to anchor the graph to the bottom.
+		if (groupedScores.length > 0){
+		//start achor
+			//score: smallest score , value : 0
+			var score = groupedScores[0].score;
+			var firstAnchor = {'score':  score, "value" : 0}
+			//groupedScores.push(firstAnchor)
+		//end anchor
+			//score: highest score , value : 0
+			var scorem = groupedScores[groupedScores.length -1].score;
+			var lastAnchor = {'score': scorem, "value" : 0}
+			//groupedScores.push(lastAnchor)
+		}
+
+		//fill in the array with 0 scores
+		var fullarray = [];
+		for (var i = 0; i <= 100; i++) {
+			fullarray.push({'score': i, 'value': 0})
+
+			groupedScores.forEach(function(element, index, array){
+				//console.log ("this old", element)
+				if (element.score == i) {
+					fullarray[i]['value'] = element['value']
+					//console.log ("this exists", element)
+				}
+			})
+		}
+		console.log(groupedScores, fullarray)
+		return fullarray
+}
