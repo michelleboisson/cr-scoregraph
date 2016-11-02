@@ -59,10 +59,19 @@ Template.product.helpers({
 })
 Template.filters.helpers({
   	fridgeCat : function(){
+  		var modifier = {};
+		if (Session.get("selectedProductCategoryID"))
+			modifier["category.id"] = Session.get("selectedProductCategoryID");
+		if (Session.get("selectedProductBrandID"))
+			modifier["brand.id"] = Session.get("selectedProductBrandID");
+
   		var myArray = ProductDatabase.find().fetch();
 		groupedByObj = _.groupBy(myArray, function(fridge){return fridge['category'].id}); 
 		//Session.set("selectedProductCategory", jsonObj);
 		//setFilters(jsonObj);
+
+
+
 		var groupedcats = [];
 		_.mapValues(groupedByObj, function(val, key) {
 		//_.mapObject(dataset, function(val, key){
@@ -70,10 +79,18 @@ Template.filters.helpers({
 			groupedcats.push({'catid': key, 'catname': val[0].category.pluralName})
 		})
 		//console.log('groupedcats', groupedcats)
+		
+		
 		return groupedcats
 		//return getFilters();
   	},
   	fridgeBrand : function(){
+  		var modifier = {};
+		if (Session.get("selectedProductCategoryID"))
+			modifier["category.id"] = Session.get("selectedProductCategoryID");
+		if (Session.get("selectedProductBrandID"))
+			modifier["brand.id"] = Session.get("selectedProductBrandID");
+
   		var myArray = ProductDatabase.find().fetch();
 		groupedByObj = _.groupBy(myArray, function(fridge){return fridge['brand'].id}); 
 		//Session.set("selectedProductCategory", jsonObj);
