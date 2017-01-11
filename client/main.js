@@ -14,24 +14,6 @@ Session.setDefault('barChartSort','none');
 Session.setDefault('barChartSortModifier',undefined);
 
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
-
 Template.body.helpers({
   products() {
   	var modifier = {};
@@ -58,6 +40,21 @@ Template.product.helpers({
 	}
 })
 Template.filters.helpers({
+	apicat: function(){
+		return API_CATEGORY;
+	},
+	filteredCount : function(){
+		var modifier = {};
+		if (Session.get("selectedProductCategoryID"))
+			modifier["category.id"] = Session.get("selectedProductCategoryID");
+		if (Session.get("selectedProductBrandID"))
+			modifier["brand.id"] = Session.get("selectedProductBrandID");
+
+		return ProductDatabase.find(modifier).fetch().length.toString();
+	},
+	totalCount : function(){
+		return ProductDatabase.find().fetch().length.toString();
+	},
   	fridgeCat : function(){
   		var modifier = {};
 		if (Session.get("selectedProductCategoryID"))
@@ -69,8 +66,6 @@ Template.filters.helpers({
 		groupedByObj = _.groupBy(myArray, function(fridge){return fridge['category'].id}); 
 		//Session.set("selectedProductCategory", jsonObj);
 		//setFilters(jsonObj);
-
-
 
 		var groupedcats = [];
 		_.mapValues(groupedByObj, function(val, key) {

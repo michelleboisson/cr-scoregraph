@@ -10,12 +10,7 @@
   <div id="container-fluid">
   <div id="" class="row-fluid">
     <div class="span12">
-      <!--
-      <div class="utest-container" data-url="http://staging.cr.codeandtheory.net" data-id="1" data-type="universal" data-user-id=""></div>
-<script src="http://staging.cr.codeandtheory.net/js/utest.js"></script>
-<p></p>
-<p></p>
-<p></p>-->
+      
     <!--  {{> bargraph}} -->
       <div class="row-fluid">
         <div class="span12">
@@ -53,13 +48,6 @@
   <li><img src="{{imageThumbnail}}" /> {{brand.displayName}} {{displayName}}, {{convertToInt overallScore}} </li>
 </template>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-
-  {{productCat}}
-</template>
-
 <template name="bargraph">
   <svg id="barChart">
     </svg>
@@ -74,22 +62,12 @@
   </div>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the chacha Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
-</template>
-
 <template name="filters">
   <div id="filters" class="row-fluid">
     <div class="span10">
   <div class="styled-select">
   <select id="changeCategory" class="form-control">
-      <option value="">All refrigerators</option>
+      <option value="">All {{{apicat}}}</option>
       {{#each fridgeCat}}
         <option value="{{catid}}">{{catname}}</option>
       {{/each}}
@@ -105,7 +83,7 @@
   </div>
 </div>
   <div class="span2" style="text-align: right">
-     __ of __
+     {{filteredCount}} of {{totalCount}}
     <img src="data-compare.png" />
     <img src="data-grid.png" />
     <img src="data-rows.png" />
