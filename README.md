@@ -14,5 +14,6 @@ The app is making an API call to get all products in a category, and copies the 
 The data displayed in the app is from this database.
 
 STEP 1: Change API_CATEGORY in glb.js
+
 STEP 2: While the app in running in your browser, open the console and run " Meteor.call('refreshProducts') "
 
